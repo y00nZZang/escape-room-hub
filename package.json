@@ -1,0 +1,37 @@
+{
+  "name": "escape-room-hub",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A policy-aware escape-room availability Web, API, worker, and MCP scaffold.",
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=24.15.0 <25",
+    "pnpm": ">=11.16.0 <12"
+  },
+  "scripts": {
+    "build": "pnpm --recursive --if-present run build",
+    "check": "biome check .",
+    "db:check": "pnpm --filter @escape-room-hub/db run db:check",
+    "db:generate": "pnpm --filter @escape-room-hub/db run db:generate",
+    "dev": "pnpm --recursive --parallel --if-present run dev",
+    "dev:api": "pnpm --filter @escape-room-hub/api dev",
+    "dev:mcp:http": "pnpm --filter @escape-room-hub/mcp dev:http",
+    "dev:mcp:stdio": "pnpm --filter @escape-room-hub/mcp dev:stdio",
+    "dev:web": "pnpm --filter @escape-room-hub/web dev",
+    "dev:worker": "pnpm --filter @escape-room-hub/worker dev",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "predev": "pnpm --filter './packages/**' --if-present run build",
+    "pretest": "pnpm --filter './packages/**' --if-present run build",
+    "research:validate": "pnpm --filter @escape-room-hub/contracts build && node packages/contracts/dist/validate-manifest.js ../escape-room-hub-research/sources/*.provider.json",
+    "test": "pnpm --recursive --if-present run test",
+    "typecheck": "pnpm --filter './packages/**' --if-present run build && pnpm --recursive --if-present run typecheck"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.7",
+    "@types/node": "24.10.1",
+    "tsx": "4.20.6",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

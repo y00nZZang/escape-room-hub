@@ -1,0 +1,32 @@
+{
+  "name": "@escape-room-hub/providers",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./experimental/naver-booking": {
+      "types": "./dist/experimental/naver-booking.d.ts",
+      "import": "./dist/experimental/naver-booking.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json --noEmit"
+  },
+  "dependencies": {
+    "@escape-room-hub/contracts": "workspace:*",
+    "@escape-room-hub/provider-kit": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

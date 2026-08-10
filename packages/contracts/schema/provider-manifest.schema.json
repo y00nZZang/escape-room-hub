@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/y00nZZang/escape-room-hub/blob/main/packages/contracts/schema/provider-manifest.schema.json",
+  "title": "Escape Room Hub Provider Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "providerId",
+    "displayName",
+    "status",
+    "distributionScope",
+    "accessBasis",
+    "officialUrl",
+    "reviewedAt",
+    "policyRefs",
+    "allowedFields",
+    "crawlIntervalSeconds"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1" },
+    "providerId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "displayName": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "status": { "enum": ["hold", "public"] },
+    "distributionScope": { "enum": ["public", "local-only"] },
+    "accessBasis": {
+      "enum": ["explicit-permission", "public-reviewed", "experimental-unapproved"]
+    },
+    "officialUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "reviewedAt": { "type": "string", "format": "date-time" },
+    "policyRefs": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "type": "string", "format": "uri", "pattern": "^https?://" }
+    },
+    "allowedFields": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+    },
+    "crawlIntervalSeconds": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 2592000
+    },
+    "providerType": {
+      "enum": ["fixture", "direct-site", "naver-booking", "other"]
+    },
+    "robotsUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "termsUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "notes": { "type": "string", "maxLength": 2000 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "public" } }, "required": ["status"] },
+      "then": {
+        "properties": {
+          "distributionScope": { "const": "public" },
+          "accessBasis": { "enum": ["explicit-permission", "public-reviewed"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "accessBasis": { "const": "experimental-unapproved" } },
+        "required": ["accessBasis"]
+      },
+      "then": {
+        "properties": {
+          "status": { "const": "hold" },
+          "distributionScope": { "const": "local-only" }
+        }
+      }
+    }
+  ]
+}

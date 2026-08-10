@@ -1,0 +1,23 @@
+{
+  "name": "@escape-room-hub/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@escape-room-hub/config": "workspace:*",
+    "@escape-room-hub/provider-kit": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.20.6",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

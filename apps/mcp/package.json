@@ -1,0 +1,30 @@
+{
+  "name": "@escape-room-hub/mcp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "pnpm run dev:http",
+    "dev:http": "tsx watch src/http.ts",
+    "dev:stdio": "tsx src/stdio.ts",
+    "start:http": "node dist/http.js",
+    "start:stdio": "node dist/stdio.js",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@escape-room-hub/config": "workspace:*",
+    "@escape-room-hub/contracts": "workspace:*",
+    "@modelcontextprotocol/node": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "24.10.1",
+    "tsx": "4.20.6",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

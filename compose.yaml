@@ -1,0 +1,21 @@
+name: escape-room-hub
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: escape_room_hub
+      POSTGRES_PASSWORD: escape_room_hub_local
+      POSTGRES_USER: escape_room_hub
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U escape_room_hub -d escape_room_hub"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
