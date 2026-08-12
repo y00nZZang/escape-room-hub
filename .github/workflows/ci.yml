@@ -32,6 +32,38 @@ jobs:
       - run: pnpm db:check
       - run: docker compose config --quiet
 
+  postgres-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: escape_room_hub
+          POSTGRES_PASSWORD: escape_room_hub_local
+          POSTGRES_USER: escape_room_hub
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U escape_room_hub -d escape_room_hub"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://escape_room_hub:escape_room_hub_local@localhost:5432/escape_room_hub
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.16.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:migrate
+      - run: pnpm --filter @escape-room-hub/worker test:integration
+
   secrets:
     runs-on: ubuntu-latest
     steps:

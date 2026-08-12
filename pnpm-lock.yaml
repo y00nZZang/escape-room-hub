@@ -116,13 +116,28 @@ importers:
       '@escape-room-hub/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@escape-room-hub/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@escape-room-hub/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@escape-room-hub/provider-kit':
         specifier: workspace:*
         version: link:../../packages/provider-kit
+      '@escape-room-hub/providers':
+        specifier: workspace:*
+        version: link:../../packages/providers
     devDependencies:
       '@types/node':
         specifier: 24.10.1
         version: 24.10.1
+      '@types/pg':
+        specifier: 8.21.0
+        version: 8.21.0
+      pg:
+        specifier: 8.23.0
+        version: 8.23.0
       tsx:
         specifier: 4.20.6
         version: 4.20.6
@@ -170,6 +185,9 @@ importers:
       '@escape-room-hub/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@escape-room-hub/provider-kit':
+        specifier: workspace:*
+        version: link:../provider-kit
       drizzle-orm:
         specifier: 0.45.2
         version: 0.45.2(@types/pg@8.21.0)(pg@8.23.0)
@@ -183,12 +201,15 @@ importers:
       drizzle-kit:
         specifier: 0.31.10
         version: 0.31.10
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
       typescript:
         specifier: 7.0.2
         version: 7.0.2
       vitest:
         specifier: 4.1.10
-        version: 4.1.10(@types/node@24.10.1)(vite@8.2.1(@types/node@24.10.1)(esbuild@0.28.2)(tsx@4.23.11))
+        version: 4.1.10(@types/node@24.10.1)(vite@8.2.1(@types/node@24.10.1)(esbuild@0.28.2)(tsx@4.20.6))
 
   packages/provider-kit:
     dependencies:

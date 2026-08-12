@@ -17,3 +17,4 @@ if (isMain) {
 }
 
 export { bootstrapWorker } from "./worker.js";
+export { ingestProvider } from "./ingestion.js";
