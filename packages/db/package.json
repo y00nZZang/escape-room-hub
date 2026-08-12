@@ -17,17 +17,20 @@
     "build": "tsc -p tsconfig.json",
     "db:check": "drizzle-kit check",
     "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/migrate.ts",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@escape-room-hub/contracts": "workspace:*",
+    "@escape-room-hub/provider-kit": "workspace:*",
     "drizzle-orm": "0.45.2",
     "pg": "8.23.0"
   },
   "devDependencies": {
     "@types/pg": "8.21.0",
     "drizzle-kit": "0.31.10",
+    "tsx": "4.20.6",
     "typescript": "7.0.2",
     "vitest": "4.1.10"
   }

@@ -5,17 +5,25 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "build:ingestion-dependencies": "pnpm --filter @escape-room-hub/db... --filter @escape-room-hub/providers... --if-present run build",
     "dev": "tsx watch src/index.ts",
+    "ingest:fixture": "pnpm run build:ingestion-dependencies && tsx src/commands/ingest-fixture.ts",
     "start": "node dist/index.js",
     "test": "vitest run",
+    "test:integration": "pnpm run build:ingestion-dependencies && RUN_POSTGRES_INTEGRATION=1 vitest run tests/fixture-ingestion.integration.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@escape-room-hub/config": "workspace:*",
-    "@escape-room-hub/provider-kit": "workspace:*"
+    "@escape-room-hub/contracts": "workspace:*",
+    "@escape-room-hub/db": "workspace:*",
+    "@escape-room-hub/provider-kit": "workspace:*",
+    "@escape-room-hub/providers": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
+    "@types/pg": "8.21.0",
+    "pg": "8.23.0",
     "tsx": "4.20.6",
     "typescript": "7.0.2",
     "vitest": "4.1.10"
