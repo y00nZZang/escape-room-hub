@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "build:ingestion-dependencies": "pnpm --filter @escape-room-hub/db... --filter @escape-room-hub/providers... --if-present run build",
     "dev": "tsx watch src/index.ts",
-    "ingest:fixture": "tsx src/commands/ingest-fixture.ts",
+    "ingest:fixture": "pnpm run build:ingestion-dependencies && tsx src/commands/ingest-fixture.ts",
     "start": "node dist/index.js",
     "test": "vitest run",
-    "test:integration": "RUN_POSTGRES_INTEGRATION=1 vitest run tests/fixture-ingestion.integration.test.ts",
+    "test:integration": "pnpm run build:ingestion-dependencies && RUN_POSTGRES_INTEGRATION=1 vitest run tests/fixture-ingestion.integration.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
