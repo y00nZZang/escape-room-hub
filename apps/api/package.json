@@ -13,7 +13,7 @@
   "dependencies": {
     "@escape-room-hub/config": "workspace:*",
     "@escape-room-hub/contracts": "workspace:*",
-    "fastify": "5.11.3"
+    "fastify": "5.12.0"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
